@@ -25,7 +25,7 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
 /* newlib uses 32-bit long in certain cases for all non-SPU
    targets.  */
 #ifndef STDINT_LONG32
-#define STDINT_LONG32 (LONG_TYPE_SIZE == 32)
+#define STDINT_LONG32 0
 #endif
 
 #define SIG_ATOMIC_TYPE "int"
