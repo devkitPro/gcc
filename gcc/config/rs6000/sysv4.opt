@@ -144,10 +144,6 @@ mrvl
 Target RejectNegative
 Link with libsysbase.a and libc.a, use rvl linker script 
 
-mwup
-Target RejectNegative
-Link with libsysbase.a and libc.a, use wup linker script 
-
 myellowknife
 Target RejectNegative
 Link with libyk.a, libc.a and crt0.o.

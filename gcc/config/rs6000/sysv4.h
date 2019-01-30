@@ -585,7 +585,6 @@ GNU_USER_TARGET_CC1_SPEC
   mvgc         : %(link_start_vgc)         ; \
   mgcbios      : %(link_start_gcb)         ; \
   mrvl         : %(link_start_rvl)         ; \
-  mwup         : %(link_start_wup)         ; \
   mads         : %(link_start_ads)         ; \
   myellowknife : %(link_start_yellowknife) ; \
   mmvme        : %(link_start_mvme)        ; \
@@ -618,7 +617,6 @@ GNU_USER_TARGET_CC1_SPEC
 /* Any specific OS flags.  */
 #define LINK_OS_SPEC "\
 %{mgcn|mogc|mvgc|mgcbios|mrvl         : %(link_os_ogc)         ; \
-  mwup         : %(link_os_wup)         ; \
   mads         : %(link_os_ads)         ; \
   myellowknife : %(link_os_yellowknife) ; \
   mmvme        : %(link_os_mvme)        ; \
@@ -637,7 +635,6 @@ GNU_USER_TARGET_CC1_SPEC
 %{mgcn         : %(cpp_os_gcn)         ; \
   mogc|mvgc|mgcbios         : %(cpp_os_ogc)         ; \
   mrvl         : %(cpp_os_rvl)         ; \
-  mwup         : %(cpp_os_wup)         ; \
   mads         : %(cpp_os_ads)         ; \
   myellowknife : %(cpp_os_yellowknife) ; \
   mmvme        : %(cpp_os_mvme)        ; \
@@ -655,7 +652,6 @@ GNU_USER_TARGET_CC1_SPEC
 %{mgcn         : %(startfile_gcn)         ; \
   mogc|mvgc|mgcbios         : %(startfile_ogc)         ; \
   mrvl         : %(startfile_ogc)         ; \
-  mwup         : %(startfile_wup)         ; \
   mads         : %(startfile_ads)         ; \
   myellowknife : %(startfile_yellowknife) ; \
   mmvme        : %(startfile_mvme)        ; \
@@ -671,7 +667,6 @@ GNU_USER_TARGET_CC1_SPEC
 #undef	LIB_SPEC
 #define	LIB_SPEC "\
 %{mgcn|mogc|mvgc|mgcbios|mrvl        : %(lib_ogc)         ; \
-  mwup         : %(lib_wup)         ; \
   mads         : %(lib_ads)         ; \
   myellowknife : %(lib_yellowknife) ; \
   mmvme        : %(lib_mvme)        ; \
@@ -687,7 +682,6 @@ GNU_USER_TARGET_CC1_SPEC
 #undef	ENDFILE_SPEC
 #define	ENDFILE_SPEC "\
 %{mgcn|mogc|mvgc|mgcbios|mrvl         : %(endfile_ogc)         ; \
-  mwup         : %(endfile_wup)         ; \
   mads         : %(endfile_ads)         ; \
   myellowknife : %(endfile_yellowknife) ; \
   mmvme        : %(endfile_mvme)        ; \
@@ -705,32 +699,26 @@ GNU_USER_TARGET_CC1_SPEC
 /* Motorola ADS support.  */
 #define LIB_ADS_SPEC "--start-group -lads -lc --end-group"
 #define LIB_OGC_SPEC "--start-group -lsysbase -lc --end-group"
-#define LIB_WUP_SPEC "--start-group -lsysbase -lc --end-group"
 
 #define	STARTFILE_ADS_SPEC "ecrti.o%s crt0.o%s crtbegin.o%s"
 #define	STARTFILE_OGC_SPEC "ecrti.o%s crtbegin.o%s crtmain.o%s"
-#define	STARTFILE_WUP_SPEC "ecrti.o%s crtbegin.o%s crtmain.o%s"
 
 #define	ENDFILE_ADS_SPEC "crtend.o%s ecrtn.o%s"
 #define	ENDFILE_OGC_SPEC "crtend.o%s ecrtn.o%s"
-#define	ENDFILE_WUP_SPEC "crtend.o%s ecrtn.o%s"
 
 #define LINK_START_ADS_SPEC "-T ads.ld%s"
 #define LINK_START_OGC_SPEC "-T ogc.ld%s"
 #define LINK_START_RVL_SPEC "-T rvl.ld%s"
-#define LINK_START_WUP_SPEC "-T wup.ld%s"
 #define LINK_START_VGC_SPEC "-T vgcogc.ld%s"
 #define LINK_START_GCB_SPEC "-T gcbogc.ld%s"
 
 #define LINK_OS_ADS_SPEC ""
 #define LINK_OS_OGC_SPEC "--gc-sections"
-#define LINK_OS_WUP_SPEC "--gc-sections"
 
 #define CPP_OS_ADS_SPEC ""
 #define CPP_OS_GCN_SPEC "-D__gamecube__ -ffunction-sections -fdata-sections"
 #define CPP_OS_OGC_SPEC "-D__gamecube__ -DHW_DOL -ffunction-sections -fdata-sections"
 #define CPP_OS_RVL_SPEC "-D__wii__ -DHW_RVL -ffunction-sections -fdata-sections"
-#define CPP_OS_WUP_SPEC "-D__wiiu__ -DHW_WUP -ffunction-sections -fdata-sections"
 
 /* Motorola Yellowknife support.  */
 #define LIB_YELLOWKNIFE_SPEC "--start-group -lyk -lc --end-group"
@@ -879,7 +867,6 @@ ncrtn.o%s"
 #define	SUBTARGET_EXTRA_SPECS						\
   { "crtsavres_default",	CRTSAVRES_DEFAULT_SPEC },		\
   { "lib_ogc",			LIB_OGC_SPEC },				\
-  { "lib_wup",			LIB_WUP_SPEC },	                        \
   { "lib_ads",			LIB_ADS_SPEC },				\
   { "lib_yellowknife",		LIB_YELLOWKNIFE_SPEC },			\
   { "lib_mvme",			LIB_MVME_SPEC },			\
@@ -890,7 +877,6 @@ ncrtn.o%s"
   { "lib_openbsd",		LIB_OPENBSD_SPEC },			\
   { "lib_default",		LIB_DEFAULT_SPEC },			\
   { "startfile_ogc",		STARTFILE_OGC_SPEC },			\
-  { "startfile_wup",		STARTFILE_WUP_SPEC },			\
   { "startfile_ads",		STARTFILE_ADS_SPEC },			\
   { "startfile_yellowknife",	STARTFILE_YELLOWKNIFE_SPEC },		\
   { "startfile_mvme",		STARTFILE_MVME_SPEC },			\
@@ -901,7 +887,6 @@ ncrtn.o%s"
   { "startfile_openbsd",	STARTFILE_OPENBSD_SPEC },		\
   { "startfile_default",	STARTFILE_DEFAULT_SPEC },		\
   { "endfile_ogc",		ENDFILE_OGC_SPEC },			\
-  { "endfile_wup",		ENDFILE_WUP_SPEC },			\
   { "endfile_ads",		ENDFILE_ADS_SPEC },			\
   { "endfile_yellowknife",	ENDFILE_YELLOWKNIFE_SPEC },		\
   { "endfile_mvme",		ENDFILE_MVME_SPEC },			\
@@ -916,7 +901,6 @@ ncrtn.o%s"
   { "link_start_vgc",		LINK_START_VGC_SPEC },			\
   { "link_start_gcb",		LINK_START_GCB_SPEC },			\
   { "link_start_rvl",		LINK_START_RVL_SPEC },			\
-  { "link_start_wup",		LINK_START_WUP_SPEC },			\
   { "link_start_ads",		LINK_START_ADS_SPEC },			\
   { "link_start_ogc",		LINK_START_OGC_SPEC },			\
   { "link_start_yellowknife",	LINK_START_YELLOWKNIFE_SPEC },		\
@@ -929,7 +913,6 @@ ncrtn.o%s"
   { "link_start_default",	LINK_START_DEFAULT_SPEC },		\
   { "link_os",			LINK_OS_SPEC },				\
   { "link_os_ogc",		LINK_OS_OGC_SPEC },			\
-  { "link_os_wup",		LINK_OS_WUP_SPEC },			\
   { "link_os_ads",		LINK_OS_ADS_SPEC },			\
   { "link_os_yellowknife",	LINK_OS_YELLOWKNIFE_SPEC },		\
   { "link_os_mvme",		LINK_OS_MVME_SPEC },			\
@@ -944,7 +927,6 @@ ncrtn.o%s"
   { "cpp_os_gcn",		CPP_OS_GCN_SPEC },			\
   { "cpp_os_ogc",		CPP_OS_OGC_SPEC },			\
   { "cpp_os_rvl",		CPP_OS_RVL_SPEC },			\
-  { "cpp_os_wup",		CPP_OS_WUP_SPEC },			\
   { "cpp_os_ads",		CPP_OS_ADS_SPEC },			\
   { "cpp_os_yellowknife",	CPP_OS_YELLOWKNIFE_SPEC },		\
   { "cpp_os_mvme",		CPP_OS_MVME_SPEC },			\
