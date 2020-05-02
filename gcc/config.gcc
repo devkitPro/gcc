@@ -1133,6 +1133,12 @@ aarch64*-*-elf | aarch64*-*-fuchsia* | aarch64*-*-rtems*)
 	case $target in
 	aarch64-*-elf*)
 		use_gcc_stdint=wrap
+		tm_file="${tm_file} devkitpro.h"
+		tm_defines="${tm_defines}  TARGET_DEFAULT_ASYNC_UNWIND_TABLES=1"
+		extra_options="${extra_options} devkitpro.opt"
+		case ${enable_threads} in
+			"" | yes | posix) thread_file='posix' ;;
+		esac
 		;;
         aarch64-*-fuchsia*)
                 tm_file="${tm_file} fuchsia.h"

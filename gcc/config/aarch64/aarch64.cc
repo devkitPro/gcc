@@ -19550,8 +19550,24 @@ aarch64_load_tp (rtx target)
       || !register_operand (target, Pmode))
     target = gen_reg_rtx (Pmode);
 
-  /* Can return in any reg.  */
-  emit_insn (gen_aarch64_load_tp_hard (target));
+  if (TARGET_HARD_TP)
+    {
+      /* Can return in any reg.  */
+      emit_insn (gen_aarch64_load_tp_hard (target));
+    }
+  else
+    {
+      /* Always returned in r0.  Immediately copy the result into a pseudo,
+	 otherwise other uses of r0 (e.g. setting up function arguments) may
+	 clobber the value.  */
+
+      rtx tmp;
+
+      emit_insn (gen_aarch64_load_tp_soft ());
+
+      tmp = gen_rtx_REG (DImode, R0_REGNUM);
+      emit_move_insn (target, tmp);
+    }
   return target;
 }
 

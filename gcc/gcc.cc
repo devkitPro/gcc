@@ -868,6 +868,11 @@ proper position among the other output files.  */
 #endif
 #endif
 
+#ifndef LIBGLOSS_SPEC
+# define LIBGLOSS_SPEC "-lsysbase"
+#endif
+
+
 /* config.h can define STARTFILE_SPEC to override the default crt0 files.  */
 #ifndef STARTFILE_SPEC
 #define STARTFILE_SPEC  \
@@ -1191,6 +1196,7 @@ static const char *link_spec = LINK_SPEC;
 static const char *lib_spec = LIB_SPEC;
 static const char *link_gomp_spec = "";
 static const char *libgcc_spec = LIBGCC_SPEC;
+static const char *libgloss_spec = LIBGLOSS_SPEC;
 static const char *endfile_spec = ENDFILE_SPEC;
 static const char *startfile_spec = STARTFILE_SPEC;
 static const char *linker_name_spec = LINKER_NAME;
@@ -1701,6 +1707,7 @@ static struct spec_list static_specs[] =
   INIT_STATIC_SPEC ("lib",			&lib_spec),
   INIT_STATIC_SPEC ("link_gomp",		&link_gomp_spec),
   INIT_STATIC_SPEC ("libgcc",			&libgcc_spec),
+  INIT_STATIC_SPEC ("libgloss",			&libgloss_spec),
   INIT_STATIC_SPEC ("startfile",		&startfile_spec),
   INIT_STATIC_SPEC ("cross_compile",		&cross_compile),
   INIT_STATIC_SPEC ("version",			&compiler_version),

@@ -52,6 +52,12 @@ enum aarch64_tls_type {
   TLS_DESCRIPTORS
 };
 
+/* Which thread pointer access sequence to use.  */
+enum aarch64_tp_type {
+  TP_HARD,
+  TP_SOFT
+};
+
 /* The code model defines the address generation strategy.
    Most have a PIC and non-PIC variant.  */
 enum aarch64_code_model {

@@ -177,8 +177,10 @@ aarch64-cc-fusion.o: $(srcdir)/config/aarch64/aarch64-cc-fusion.cc \
 		$(srcdir)/config/aarch64/aarch64-cc-fusion.cc
 
 comma=,
-MULTILIB_OPTIONS    = $(subst $(comma),/, $(patsubst %, mabi=%, $(subst $(comma),$(comma)mabi=,$(TM_MULTILIB_CONFIG))))
-MULTILIB_DIRNAMES   = $(subst $(comma), ,$(TM_MULTILIB_CONFIG))
+MULTILIB_OPTIONS    = mcmodel=large fPIC
+MULTILIB_DIRNAMES   = large pic
+MULTILIB_REQUIRED   = mcmodel=large fPIC
+MULTILIB_MATCHES    = fPIC=fpic fPIC=fpie fPIC=fPIE
 
 insn-conditions.md: s-check-sve-md
 s-check-sve-md: $(srcdir)/config/aarch64/check-sve-md.awk \
