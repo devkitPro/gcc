@@ -1132,6 +1132,7 @@ aarch64*-*-elf | aarch64*-*-fuchsia* | aarch64*-*-rtems*)
 	tmake_file="${tmake_file} aarch64/t-aarch64"
 	case $target in
 	aarch64-*-elf*)
+		default_use_cxa_atexit=yes
 		use_gcc_stdint=wrap
 		tm_file="${tm_file} devkitpro.h"
 		tm_defines="${tm_defines}  TARGET_DEFAULT_ASYNC_UNWIND_TABLES=1"
