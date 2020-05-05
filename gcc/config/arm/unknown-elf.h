@@ -29,7 +29,7 @@
 #endif
 
 /* Now we define the strings used to build the spec file.  */
-#define UNKNOWN_ELF_STARTFILE_SPEC	" crti%O%s crtbegin%O%s crt0%O%s"
+#define UNKNOWN_ELF_STARTFILE_SPEC	" crti%O%s crtbegin%O%s"
 
 #undef  STARTFILE_SPEC
 #define STARTFILE_SPEC	\
@@ -93,4 +93,5 @@
    udivmoddi4, which will depend on the exception unwind routines,
    which will depend on abort, which is defined in libc.  */ 
 #undef LINK_GCC_C_SEQUENCE_SPEC
-#define LINK_GCC_C_SEQUENCE_SPEC "--start-group %G %{!nolibc:%L} --end-group"
+#define LINK_GCC_C_SEQUENCE_SPEC "--start-group %G %L %(libgloss) --end-group"
+

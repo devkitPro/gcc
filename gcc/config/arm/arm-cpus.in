@@ -416,7 +416,7 @@ begin arch armv6k
  tune for mpcore
  tune flags CO_PROC
  base 6K
- isa ARMv6k
+ isa ARMv6k VFPv2 FP_DBL
  option fp add VFPv2 FP_DBL
  optalias vfpv2 fp
  option nofp remove ALL_FP
