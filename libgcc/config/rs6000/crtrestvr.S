@@ -24,7 +24,7 @@
 
 /* On PowerPC64 Linux, these functions are provided by the linker.  */
 #ifndef __powerpc64__
-
+#if 0
 #undef __ALTIVEC__
 #define __ALTIVEC__ 1
 	#include "ppc-asm.h"
@@ -85,4 +85,5 @@ FUNC_END(_restvr_21)
 FUNC_END(_restvr_20)
 CFI_ENDPROC
 
+#endif
 #endif

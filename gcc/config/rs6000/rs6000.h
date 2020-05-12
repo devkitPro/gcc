@@ -199,6 +199,7 @@ ASM_OPT_ANY
 /* -mcpu=native handling only makes sense with compiler running on
    an PowerPC chip.  If changing this condition, also change
    the condition in driver-rs6000.cc.  */
+#if 0
 #if defined(__powerpc__) || defined(__POWERPC__) || defined(_AIX)
 /* In driver-rs6000.cc.  */
 extern const char *host_detect_local_cpu (int argc, const char **argv);
@@ -210,6 +211,8 @@ extern const char *host_detect_local_cpu (int argc, const char **argv);
 #else
 #define ASM_CPU_NATIVE_SPEC "%(asm_default)"
 #endif
+#endif
+#define ASM_CPU_NATIVE_SPEC "%(asm_default)"
 
 #ifndef CC1_CPU_SPEC
 #ifdef HAVE_LOCAL_CPU_DETECT
