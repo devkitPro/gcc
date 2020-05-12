@@ -124,6 +124,30 @@ mads
 Target RejectNegative
 Link with libads.a, libc.a and crt0.o.
 
+mgcn
+Target RejectNegative
+Link with libsysbase.a and libc.a, use ogc linker script 
+
+mogc
+Target RejectNegative
+Link with libsysbase.a and libc.a, use ogc linker script 
+
+mgcbios
+Target RejectNegative
+Link with libsysbase.a and libc.a, use gcbogc linker script 
+
+mvgc
+Target RejectNegative
+Link with libsysbase.a and libc.a, use gcbogc linker script 
+
+mrvl
+Target RejectNegative
+Link with libsysbase.a and libc.a, use rvl linker script 
+
+mwup
+Target RejectNegative
+Link with libsysbase.a and libc.a, use wup linker script 
+
 myellowknife
 Target RejectNegative
 Link with libyk.a, libc.a and crt0.o.
