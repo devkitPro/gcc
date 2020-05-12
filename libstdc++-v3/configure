@@ -15800,6 +15800,7 @@ $as_echo "$target_thread_file" >&6; }
 case $target_thread_file in
     aix)	thread_header=config/rs6000/gthr-aix.h ;;
     dce)	thread_header=config/pa/gthr-dce.h ;;
+    dkp)        thread_header=config/rs6000/gthr-dkp.h ;;
     gcn)	thread_header=config/gcn/gthr-gcn.h ;;
     lynx)	thread_header=config/gthr-lynx.h ;;
     mipssde)	thread_header=config/mips/gthr-mipssde.h ;;
