@@ -23,327 +23,297 @@ a copy of the GCC Runtime Library Exception along with this program;
 see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
 <http://www.gnu.org/licenses/>.  */
 
+#define _BUILDING_LIBGCC
 #include "gthr-dkp.h"
 #include <stddef.h>
 
-__gthread_impl_t __gthread_impl = {
-  NULL, // active
-  NULL, // create
-  NULL, // join
-  NULL, // detach
-  NULL, // equal
-  NULL, // self
-  NULL, // yield
-  NULL, // once
-  NULL, // key_create
-  NULL, // key_delete
-  NULL, // getspecific
-  NULL, // setspecific
-  NULL, // mutex_init_function
-  NULL, // mutex_destroy
-  NULL, // mutex_lock
-  NULL, // mutex_trylock
-  NULL, // mutex_unlock
-  NULL, // recursive_mutex_init_function
-  NULL, // recursive_mutex_lock
-  NULL, // recursive_mutex_trylock
-  NULL, // recursive_mutex_unlock
-  NULL, // recursive_mutex_destroy
-  NULL, // cond_init_function
-  NULL, // cond_broadcast
-  NULL, // cond_signal
-  NULL, // cond_wait
-  NULL, // cond_timedwait
-  NULL, // cond_wait_recursive
-  NULL, // cond_destroy
-};
 
 int
 __gthread_active_p (void)
 {
-  if (!__gthread_impl.active) {
+  if (!__has_gthr_impl(active)) {
     return 0;
   }
 
-  return __gthread_impl.active();
+  return __gthr_impl_active();
 }
 
 int
 __gthread_create (__gthread_t *__threadid, void *(*__func) (void*),
                   void *__args)
 {
-  if (!__gthread_impl.create) {
+  if (!__has_gthr_impl(create)) {
     return -1;
   }
 
-  return __gthread_impl.create(__threadid, __func, __args);
+  return __gthr_impl_create(__threadid, __func, __args);
 }
 
 int
 __gthread_join (__gthread_t __threadid, void **__value_ptr)
 {
-  if (!__gthread_impl.join) {
+  if (!__has_gthr_impl(join)) {
     return -1;
   }
 
-  return __gthread_impl.join(__threadid, __value_ptr);
+  return __gthr_impl_join(__threadid, __value_ptr);
 }
 
 int
 __gthread_detach (__gthread_t __threadid)
 {
-  if (!__gthread_impl.detach) {
+  if (!__has_gthr_impl(detach)) {
     return -1;
   }
 
-  return __gthread_impl.detach(__threadid);
+  return __gthr_impl_detach(__threadid);
 }
 
 int
 __gthread_equal (__gthread_t __t1, __gthread_t __t2)
 {
-  if (!__gthread_impl.equal) {
+  if (!__has_gthr_impl(equal)) {
     return -1;
   }
 
-  return __gthread_impl.equal(__t1, __t2);
+  return __gthr_impl_equal(__t1, __t2);
 }
 
 __gthread_t
 __gthread_self (void)
 {
-  if (!__gthread_impl.self) {
+  if (!__has_gthr_impl(self)) {
     __gthread_t result = { 0 };
     return result;
   }
 
-  return __gthread_impl.self();
+  return __gthr_impl_self();
 }
 
 int
 __gthread_yield (void)
 {
-  if (!__gthread_impl.yield) {
+  if (!__has_gthr_impl(yield)) {
     return -1;
   }
 
-  return __gthread_impl.yield();
+  return __gthr_impl_yield();
 }
 
 int
 __gthread_once (__gthread_once_t *__once, void (*__func) (void))
 {
-  if (!__gthread_impl.once) {
+  if (!__has_gthr_impl(once)) {
     return -1;
   }
 
-  return __gthread_impl.once(__once, __func);
+  return __gthr_impl_once(__once, __func);
 }
 
 int
 __gthread_key_create (__gthread_key_t *__key, void (*__dtor) (void *))
 {
-  if (!__gthread_impl.key_create) {
+  if (!__has_gthr_impl(key_create)) {
     return -1;
   }
 
-  return __gthread_impl.key_create(__key, __dtor);
+  return __gthr_impl_key_create(__key, __dtor);
 }
 
 int
 __gthread_key_delete (__gthread_key_t __key)
 {
-  if (!__gthread_impl.key_delete) {
+  if (!__has_gthr_impl(key_delete)) {
     return -1;
   }
 
-  return __gthread_impl.key_delete(__key);
+  return __gthr_impl_key_delete(__key);
 }
 
 void *
 __gthread_getspecific (__gthread_key_t __key)
 {
-  if (!__gthread_impl.getspecific) {
+  if (!__has_gthr_impl(getspecific)) {
     return NULL;
   }
 
-  return __gthread_impl.getspecific(__key);
+  return __gthr_impl_getspecific(__key);
 }
 
 int
 __gthread_setspecific (__gthread_key_t __key, const void *__ptr)
 {
-  if (!__gthread_impl.setspecific) {
+  if (!__has_gthr_impl(setspecific)) {
     return -1;
   }
 
-  return __gthread_impl.setspecific(__key, __ptr);
+  return __gthr_impl_setspecific(__key, __ptr);
 }
 
 void
 __gthread_mutex_init_function (__gthread_mutex_t *__mutex)
 {
-  if (__gthread_impl.mutex_init_function) {
-    __gthread_impl.mutex_init_function(__mutex);
+  if (__has_gthr_impl(mutex_init_function)) {
+    __gthr_impl_mutex_init_function(__mutex);
   }
 }
 
 int
 __gthread_mutex_destroy (__gthread_mutex_t *__mutex)
 {
-  if (!__gthread_impl.mutex_destroy) {
+  if (!__has_gthr_impl(mutex_destroy)) {
     return -1;
   }
 
-  return __gthread_impl.mutex_destroy(__mutex);
+  return __gthr_impl_mutex_destroy(__mutex);
 }
 
 int
 __gthread_mutex_lock (__gthread_mutex_t *__mutex)
 {
-  if (!__gthread_impl.mutex_lock) {
+  if (!__has_gthr_impl(mutex_lock)) {
     return -1;
   }
 
-  return __gthread_impl.mutex_lock(__mutex);
+  return __gthr_impl_mutex_lock(__mutex);
 }
 
 int
 __gthread_mutex_trylock (__gthread_mutex_t *__mutex)
 {
-  if (!__gthread_impl.mutex_trylock) {
+  if (!__has_gthr_impl(mutex_trylock)) {
     return -1;
   }
 
-  return __gthread_impl.mutex_trylock(__mutex);
+  return __gthr_impl_mutex_trylock(__mutex);
 }
 
 int
 __gthread_mutex_unlock (__gthread_mutex_t *__mutex)
 {
-  if (!__gthread_impl.mutex_unlock) {
+  if (!__has_gthr_impl(mutex_unlock)) {
     return -1;
   }
 
-  return __gthread_impl.mutex_unlock(__mutex);
+  return __gthr_impl_mutex_unlock(__mutex);
 }
 
 int
 __gthread_recursive_mutex_init_function (__gthread_recursive_mutex_t *__mutex)
 {
-  if (!__gthread_impl.recursive_mutex_init_function) {
+  if (!__has_gthr_impl(recursive_mutex_init_function)) {
     return -1;
   }
 
-  return __gthread_impl.recursive_mutex_init_function(__mutex);
+  return __gthr_impl_recursive_mutex_init_function(__mutex);
 }
 
 int
 __gthread_recursive_mutex_lock (__gthread_recursive_mutex_t *__mutex)
 {
-  if (!__gthread_impl.recursive_mutex_lock) {
+  if (!__has_gthr_impl(recursive_mutex_lock)) {
     return -1;
   }
 
-  return __gthread_impl.recursive_mutex_lock(__mutex);
+  return __gthr_impl_recursive_mutex_lock(__mutex);
 }
 
 int
 __gthread_recursive_mutex_trylock (__gthread_recursive_mutex_t *__mutex)
 {
-  if (!__gthread_impl.recursive_mutex_trylock) {
+  if (!__has_gthr_impl(recursive_mutex_trylock)) {
     return -1;
   }
 
-  return __gthread_impl.recursive_mutex_trylock(__mutex);
+  return __gthr_impl_recursive_mutex_trylock(__mutex);
 }
 
 int
 __gthread_recursive_mutex_unlock (__gthread_recursive_mutex_t *__mutex)
 {
-  if (!__gthread_impl.recursive_mutex_unlock) {
+  if (!__has_gthr_impl(recursive_mutex_unlock)) {
     return -1;
   }
 
-  return __gthread_impl.recursive_mutex_unlock(__mutex);
+  return __gthr_impl_recursive_mutex_unlock(__mutex);
 }
 
 int
 __gthread_recursive_mutex_destroy (__gthread_recursive_mutex_t *__mutex)
 {
-  if (!__gthread_impl.recursive_mutex_destroy) {
+  if (!__has_gthr_impl(recursive_mutex_destroy)) {
     return -1;
   }
 
-  return __gthread_impl.recursive_mutex_destroy(__mutex);
+  return __gthr_impl_recursive_mutex_destroy(__mutex);
 }
 
 void
 __gthread_cond_init_function (__gthread_cond_t *__cond)
 {
-  if (__gthread_impl.cond_init_function) {
-    __gthread_impl.cond_init_function(__cond);
+  if (__has_gthr_impl(cond_init_function)) {
+    __gthr_impl_cond_init_function(__cond);
   }
 }
 
 int
 __gthread_cond_broadcast (__gthread_cond_t *__cond)
 {
-  if (!__gthread_impl.cond_broadcast) {
+  if (!__has_gthr_impl(cond_broadcast)) {
     return -1;
   }
 
-  return __gthread_impl.cond_broadcast(__cond);
+  return __gthr_impl_cond_broadcast(__cond);
 }
 
 int
 __gthread_cond_signal (__gthread_cond_t *__cond)
 {
-  if (!__gthread_impl.cond_signal) {
+  if (!__has_gthr_impl(cond_signal)) {
     return -1;
   }
 
-  return __gthread_impl.cond_signal(__cond);
+  return __gthr_impl_cond_signal(__cond);
 }
 
 int
 __gthread_cond_wait (__gthread_cond_t *__cond, __gthread_mutex_t *__mutex)
 {
-  if (!__gthread_impl.cond_wait) {
+  if (!__has_gthr_impl(cond_wait)) {
     return -1;
   }
 
-  return __gthread_impl.cond_wait(__cond, __mutex);
+  return __gthr_impl_cond_wait(__cond, __mutex);
 }
 
 int
 __gthread_cond_timedwait (__gthread_cond_t *__cond, __gthread_mutex_t *__mutex,
                           const __gthread_time_t *__abs_timeout)
 {
-  if (!__gthread_impl.cond_timedwait) {
+  if (!__has_gthr_impl(cond_timedwait)) {
     return -1;
   }
 
-  return __gthread_impl.cond_timedwait(__cond, __mutex, __abs_timeout);
+  return __gthr_impl_cond_timedwait(__cond, __mutex, __abs_timeout);
 }
 
 int
 __gthread_cond_wait_recursive (__gthread_cond_t *__cond,
                                __gthread_recursive_mutex_t *__mutex)
 {
-  if (!__gthread_impl.cond_wait_recursive) {
+  if (!__has_gthr_impl(cond_wait_recursive)) {
     return -1;
   }
 
-  return __gthread_impl.cond_wait_recursive(__cond, __mutex);
+  return __gthr_impl_cond_wait_recursive(__cond, __mutex);
 }
 
 int
 __gthread_cond_destroy (__gthread_cond_t* __cond)
 {
-  if (!__gthread_impl.cond_destroy) {
+  if (!__has_gthr_impl(cond_destroy)) {
     return -1;
   }
 
-  return __gthread_impl.cond_destroy(__cond);
+  return __gthr_impl_cond_destroy(__cond);
 }
