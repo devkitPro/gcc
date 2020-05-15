@@ -51,42 +51,44 @@ typedef struct timespec             __gthread_time_t;
 #define __GTHREAD_MUTEX_INIT_FUNCTION __gthread_mutex_init_function
 #define __GTHREAD_RECURSIVE_MUTEX_INIT_FUNCTION __gthread_recursive_mutex_init_function
 
-typedef struct {
-  int (*active) (void);
-  int (*create) (__gthread_t *__threadid, void *(*__func) (void*),
-                 void *__args);
-  int (*join) (__gthread_t __threadid, void **__value_ptr);
-  int (*detach) (__gthread_t __threadid);
-  int (*equal) (__gthread_t __t1, __gthread_t __t2);
-  __gthread_t (*self) (void);
-  int (*yield) (void);
-  int (*once) (__gthread_once_t *__once, void (*__func) (void));
-  int (*key_create) (__gthread_key_t *__key, void (*__dtor) (void *));
-  int (*key_delete) (__gthread_key_t __key);
-  void * (*getspecific) (__gthread_key_t __key);
-  int (*setspecific) (__gthread_key_t __key, const void *__ptr);
-  void (*mutex_init_function) (__gthread_mutex_t *__mutex);
-  int (*mutex_destroy) (__gthread_mutex_t *__mutex);
-  int (*mutex_lock) (__gthread_mutex_t *__mutex);
-  int (*mutex_trylock) (__gthread_mutex_t *__mutex);
-  int (*mutex_unlock) (__gthread_mutex_t *__mutex);
-  int (*recursive_mutex_init_function) (__gthread_recursive_mutex_t *__mutex);
-  int (*recursive_mutex_lock) (__gthread_recursive_mutex_t *__mutex);
-  int (*recursive_mutex_trylock) (__gthread_recursive_mutex_t *__mutex);
-  int (*recursive_mutex_unlock) (__gthread_recursive_mutex_t *__mutex);
-  int (*recursive_mutex_destroy) (__gthread_recursive_mutex_t *__mutex);
-  void (*cond_init_function) (__gthread_cond_t *__cond);
-  int (*cond_broadcast) (__gthread_cond_t *__cond);
-  int (*cond_signal) (__gthread_cond_t *__cond);
-  int (*cond_wait) (__gthread_cond_t *__cond, __gthread_mutex_t *__mutex);
-  int (*cond_timedwait) (__gthread_cond_t *__cond, __gthread_mutex_t *__mutex,
-                         const __gthread_time_t *__abs_timeout);
-  int (*cond_wait_recursive) (__gthread_cond_t *__cond,
-                              __gthread_recursive_mutex_t *__mutex);
-  int (*cond_destroy) (__gthread_cond_t* __cond);
-} __gthread_impl_t;
+#ifdef _BUILDING_LIBGCC
+#define __GTHR_IMPL(_name) __attribute__((weak)) __gthr_impl_##_name
+#define __has_gthr_impl(_name) (&__gthr_impl_##_name)
+#else
+#define __GTHR_IMPL(_name) __gthr_impl_##_name
+#endif
 
-extern __gthread_impl_t __gthread_impl;
+int __GTHR_IMPL(active) (void);
+int __GTHR_IMPL(create) (__gthread_t *__threadid, void *(*__func) (void*), void *__args);
+int __GTHR_IMPL(join) (__gthread_t __threadid, void **__value_ptr);
+int __GTHR_IMPL(detach) (__gthread_t __threadid);
+int __GTHR_IMPL(equal) (__gthread_t __t1, __gthread_t __t2);
+__gthread_t __GTHR_IMPL(self) (void);
+int __GTHR_IMPL(yield) (void);
+int __GTHR_IMPL(once) (__gthread_once_t *__once, void (*__func) (void));
+int __GTHR_IMPL(key_create) (__gthread_key_t *__key, void (*__dtor) (void *));
+int __GTHR_IMPL(key_delete) (__gthread_key_t __key);
+void * __GTHR_IMPL(getspecific) (__gthread_key_t __key);
+int __GTHR_IMPL(setspecific) (__gthread_key_t __key, const void *__ptr);
+void __GTHR_IMPL(mutex_init_function) (__gthread_mutex_t *__mutex);
+int __GTHR_IMPL(mutex_destroy) (__gthread_mutex_t *__mutex);
+int __GTHR_IMPL(mutex_lock) (__gthread_mutex_t *__mutex);
+int __GTHR_IMPL(mutex_trylock) (__gthread_mutex_t *__mutex);
+int __GTHR_IMPL(mutex_unlock) (__gthread_mutex_t *__mutex);
+int __GTHR_IMPL(recursive_mutex_init_function) (__gthread_recursive_mutex_t *__mutex);
+int __GTHR_IMPL(recursive_mutex_lock) (__gthread_recursive_mutex_t *__mutex);
+int __GTHR_IMPL(recursive_mutex_trylock) (__gthread_recursive_mutex_t *__mutex);
+int __GTHR_IMPL(recursive_mutex_unlock) (__gthread_recursive_mutex_t *__mutex);
+int __GTHR_IMPL(recursive_mutex_destroy) (__gthread_recursive_mutex_t *__mutex);
+void __GTHR_IMPL(cond_init_function) (__gthread_cond_t *__cond);
+int __GTHR_IMPL(cond_broadcast) (__gthread_cond_t *__cond);
+int __GTHR_IMPL(cond_signal) (__gthread_cond_t *__cond);
+int __GTHR_IMPL(cond_wait) (__gthread_cond_t *__cond, __gthread_mutex_t *__mutex);
+int __GTHR_IMPL(cond_timedwait) (__gthread_cond_t *__cond, __gthread_mutex_t *__mutex,
+                         const __gthread_time_t *__abs_timeout);
+int __GTHR_IMPL(cond_wait_recursive) (__gthread_cond_t *__cond,
+                              __gthread_recursive_mutex_t *__mutex);
+int __GTHR_IMPL(cond_destroy) (__gthread_cond_t* __cond);
 
 int
 __gthread_active_p (void);
