@@ -326,7 +326,7 @@ register_tm_clones (void)
 
 #ifdef OBJECT_FORMAT_ELF
 
-#if DEFAULT_USE_CXA_ATEXIT
+#if 1 /* DEFAULT_USE_CXA_ATEXIT */
 /* Declare the __dso_handle variable.  It should have a unique value
    in every shared-object; in a main program its value is zero.  The
    object should in any case be protected.  This means the instance
