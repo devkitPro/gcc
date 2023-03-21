@@ -48,7 +48,7 @@
 
 // This can be overridden by the target's os_defines.h
 #ifndef _GLIBCXX_BUFSIZ
-# define _GLIBCXX_BUFSIZ BUFSIZ
+# define _GLIBCXX_BUFSIZ (BUFSIZ+1)
 #endif
 
 namespace std _GLIBCXX_VISIBILITY(default)
