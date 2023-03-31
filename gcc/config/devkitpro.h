@@ -20,6 +20,7 @@
 #undef TARGET_OS_CPP_BUILTINS
 #define TARGET_OS_CPP_BUILTINS()                \
     do {                                        \
+        builtin_define ("__DEVKITPRO__");       \
         builtin_define ("__DEVKITARM__");       \
     } while (0)
 
