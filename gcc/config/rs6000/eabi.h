@@ -36,6 +36,8 @@
       builtin_assert ("system=embedded"); \
       builtin_assert ("cpu=powerpc");     \
       builtin_assert ("machine=powerpc"); \
+      builtin_define ("__DEVKITPPC__");   \
+      builtin_define ("__DEVKITPRO__");   \
       TARGET_OS_SYSV_CPP_BUILTINS ();     \
     }                                     \
   while (0)
