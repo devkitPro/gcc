@@ -1482,6 +1482,11 @@ arm*-*-eabi* | arm*-*-symbianelf* | arm*-*-rtems* | arm*-*-fuchsia*)
 	  tm_file="$tm_file newlib-stdint.h"
 	  tmake_file="${tmake_file} arm/t-bpabi"
 	  use_gcc_stdint=wrap
+	  tm_file="${tm_file} devkitpro.h"
+	  extra_options="${extra_options} devkitpro.opt"
+	  case ${enable_threads} in
+		"" | yes | posix) thread_file='posix' ;;
+	  esac
 	  ;;
 	arm*-*-fuchsia*)
 	  tm_file="${tm_file} fuchsia.h arm/fuchsia-elf.h glibc-stdint.h"

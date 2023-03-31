@@ -1429,6 +1429,7 @@ ${host_builddir}/gthr.h: ${toplevel_srcdir}/libgcc/gthr.h stamp-${host_alias}
 	    -e '/^#/s/\(${uppercase}${uppercase}*\)/_GLIBCXX_\1/g' \
 	    -e 's/_GLIBCXX_SUPPORTS_WEAK/__GXX_WEAK__/g' \
 	    -e 's/_GLIBCXX___MINGW32_GLIBCXX___/__MINGW32__/g' \
+	    -e 's/_GLIBCXX___DEVKITARM_GLIBCXX___/__DEVKITARM__/g' \
 	    -e 's,^#include "\(.*\)",#include <bits/\1>,g' \
 	    < $< > $@
 
