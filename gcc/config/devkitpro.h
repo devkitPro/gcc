@@ -26,6 +26,7 @@
 #define TARGET_OS_CPP_BUILTINS()                \
     do {                                        \
         builtin_define ("__DEVKITA64__");       \
+        builtin_define ("__DEVKITPRO__");       \
     } while (0)
 
 
