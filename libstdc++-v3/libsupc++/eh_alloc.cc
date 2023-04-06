@@ -143,6 +143,7 @@ namespace
     {
     public:
       pool() noexcept;
+      ~pool();
 
       _GLIBCXX_NODISCARD void *allocate (std::size_t) noexcept;
       void free (void *) noexcept;
@@ -246,6 +247,15 @@ namespace
       new (first_free_entry) free_entry;
       first_free_entry->size = arena_size;
       first_free_entry->next = NULL;
+    }
+
+  pool::~pool()
+    {
+      if (arena)
+        {
+          ::free(arena);
+          arena = 0;
+        }
     }
 
   void *pool::allocate (std::size_t size) noexcept
