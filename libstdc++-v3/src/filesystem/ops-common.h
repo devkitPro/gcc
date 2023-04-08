@@ -486,6 +486,7 @@ _GLIBCXX_BEGIN_NAMESPACE_FILESYSTEM
 	return false;
       }
 
+#ifndef __DEVKITPPC__
 #if defined _GLIBCXX_USE_FCHMOD && ! defined _GLIBCXX_FILESYSTEM_IS_WINDOWS
     if (::fchmod(out.fd, from_st->st_mode))
 #elif defined _GLIBCXX_USE_FCHMODAT && ! defined _GLIBCXX_FILESYSTEM_IS_WINDOWS
@@ -497,6 +498,7 @@ _GLIBCXX_BEGIN_NAMESPACE_FILESYSTEM
 	ec.assign(errno, std::generic_category());
 	return false;
       }
+#endif
 
     size_t count = from_st->st_size;
 #if defined _GLIBCXX_USE_SENDFILE && ! defined _GLIBCXX_FILESYSTEM_IS_WINDOWS
