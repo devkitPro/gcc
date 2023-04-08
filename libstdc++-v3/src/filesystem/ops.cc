@@ -973,6 +973,7 @@ fs::permissions(const path& p, perms prms, error_code& ec) noexcept
     }
 
   int err = 0;
+#ifndef __DEVKITPPC__
 #if _GLIBCXX_USE_FCHMODAT
   const int flag = (nofollow && is_symlink(st)) ? AT_SYMLINK_NOFOLLOW : 0;
   if (::fchmodat(AT_FDCWD, p.c_str(), static_cast<mode_t>(prms), flag))
@@ -982,6 +983,7 @@ fs::permissions(const path& p, perms prms, error_code& ec) noexcept
     ec = std::__unsupported();
   else if (posix::chmod(p.c_str(), static_cast<mode_t>(prms)))
     err = errno;
+#endif
 #endif
 
   if (err)
