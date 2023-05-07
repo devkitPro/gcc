@@ -93,7 +93,10 @@ mingw32_gt_pch_get_address (size_t size, int)
      for NT system dlls is in 0x70000000 to 0x78000000 range.
      If we allocate at bottom we need to reserve the address as early
      as possible and at the same point in each invocation. */
- 
+
+#if __MINGW64__
+  size  = UINT64_C(64 * 1024 * 1024 * 1024);
+#endif
   res = VirtualAlloc (NULL, size,
 		      MEM_RESERVE | MEM_TOP_DOWN,
 		      PAGE_NOACCESS);
