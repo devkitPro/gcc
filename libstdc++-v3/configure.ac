@@ -386,6 +386,7 @@ dnl # rather than hardcoding that information.
     fi
 
     AC_DEFINE(HAVE_MEMALIGN)
+    AC_DEFINE(HAVE_ALIGNED_ALLOC)
 
     case "${target}" in
       *-rtems*)
